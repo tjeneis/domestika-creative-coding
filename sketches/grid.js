@@ -67,7 +67,6 @@ const sketch = () => {
 
       context.restore();
     }
-
   };
 };
 

@@ -1,6 +1,7 @@
 const canvasSketch = require('canvas-sketch');
 const random = require('canvas-sketch-util/random');
 const math = require('canvas-sketch-util/math');
+const Tweakpane = require('tweakpane');
 
 const settings = {
   dimensions: 'A4',
@@ -9,10 +10,15 @@ const settings = {
   prefix: 'artwork',
 };
 
+const params = {
+  agents: 100,
+  dist: 200
+}
+
 const sketch = ({ context, width, height }) => {
   const agents = [];
 
-  for (let i = 0; i < 40; i++) {
+  for (let i = 0; i < params.agents; i++) {
     const x = random.range(0, width);
     const y = random.range(0, height);
 
@@ -31,9 +37,9 @@ const sketch = ({ context, width, height }) => {
 
         const dist = agent.pos.getDistance(other.pos);
 
-        if (dist > 200) continue;
+        if (dist > params.dist) continue;
 
-        context.lineWidth = math.mapRange(dist, 0, 200, 12, 1);
+        context.lineWidth = math.mapRange(dist, 0, params.dist, 12, 1);
 
         context.beginPath();
         context.moveTo(agent.pos.x, agent.pos.y);
@@ -50,6 +56,35 @@ const sketch = ({ context, width, height }) => {
   };
 };
 
+const createPane = () => {
+  const pane = new Tweakpane.Pane();
+  let folder;
+
+  folder = pane.addFolder({
+    title: 'Sketch'
+  });
+  folder.addInput(params, 'agents', {
+    min: 1,
+    max: 500,
+    step: 1
+  });
+  folder.addInput(params, 'dist', {
+    min: 1,
+    max: 500,
+    step: 1
+  });
+
+  folder = pane.addFolder({
+    title: 'Animate'
+  });
+  folder.addInput(params, 'animate');
+  folder.addInput(params, 'frame', {
+    min: 0,
+    max: 999
+  });
+}
+
+createPane();
 canvasSketch(sketch, settings);
 
 class Vector {
