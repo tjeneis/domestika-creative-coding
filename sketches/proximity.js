@@ -5,7 +5,8 @@ const math = require('canvas-sketch-util/math');
 const settings = {
   dimensions: 'A4',
   pixelsPerInch: 300,
-  animate: true
+  animate: true,
+  prefix: 'artwork',
 };
 
 const sketch = ({ context, width, height }) => {

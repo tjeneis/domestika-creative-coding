@@ -6,7 +6,8 @@ const Tweakpane = require('tweakpane');
 const settings = {
   dimensions: 'A4',
   pixelsPerInch: 300,
-  animate: true
+  animate: true,
+  prefix: 'artwork',
 };
 
 const params = {
