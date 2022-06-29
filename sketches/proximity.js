@@ -11,14 +11,15 @@ const settings = {
 };
 
 const params = {
-  agents: 100,
-  dist: 200
+  dist: 200,
+  bounce: false,
+  wrap: true
 }
 
 const sketch = ({ context, width, height }) => {
   const agents = [];
 
-  for (let i = 0; i < params.agents; i++) {
+  for (let i = 0; i < 200; i++) {
     const x = random.range(0, width);
     const y = random.range(0, height);
 
@@ -51,7 +52,8 @@ const sketch = ({ context, width, height }) => {
     agents.forEach(agent => {
       agent.update();
       agent.draw(context);
-      agent.wrap(width, height);
+      if (params.wrap) agent.wrap(width, height);
+      else if (params.bounce) agent.bounce(width, height);
     });
   };
 };
@@ -63,16 +65,13 @@ const createPane = () => {
   folder = pane.addFolder({
     title: 'Sketch'
   });
-  folder.addInput(params, 'agents', {
-    min: 1,
-    max: 500,
-    step: 1
-  });
   folder.addInput(params, 'dist', {
     min: 1,
     max: 500,
     step: 1
   });
+  folder.addInput(params, 'wrap');
+  folder.addInput(params, 'bounce');
 }
 
 createPane();
