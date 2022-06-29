@@ -73,15 +73,6 @@ const createPane = () => {
     max: 500,
     step: 1
   });
-
-  folder = pane.addFolder({
-    title: 'Animate'
-  });
-  folder.addInput(params, 'animate');
-  folder.addInput(params, 'frame', {
-    min: 0,
-    max: 999
-  });
 }
 
 createPane();
