@@ -3,7 +3,8 @@ const random = require('canvas-sketch-util/random');
 const math = require('canvas-sketch-util/math');
 
 const settings = {
-  dimensions: [1080, 1080],
+  dimensions: 'A4',
+  pixelsPerInch: 300,
   animate: true
 };
 
