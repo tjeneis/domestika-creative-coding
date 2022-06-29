@@ -4,7 +4,8 @@ const math = require('canvas-sketch-util/math');
 const Tweakpane = require('tweakpane');
 
 const settings = {
-  dimensions: [1080, 1080],
+  dimensions: 'a4',
+  pixelsPerInch: 300,
   animate: true
 };
 
